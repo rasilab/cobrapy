@@ -9,6 +9,7 @@ from builtins import object, super
 from warnings import warn
 
 from numpy import zeros, asarray, nan
+from pandas import Series, DataFrame
 from optlang.interface import OPTIMAL
 from pandas import Series
 
@@ -168,6 +169,11 @@ class Solution(object):
         """Deprecated property for getting reduced cost values."""
         warn("use solution.reduced_costs.values() instead", DeprecationWarning)
         return self.reduced_costs.values
+
+    @property
+    def data_frame(self):
+        return DataFrame({'fluxes': self.fluxes,
+                          'reduced_costs': self.reduced_costs})
 
 
 class LegacySolution(object):
